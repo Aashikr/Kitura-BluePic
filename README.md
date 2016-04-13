@@ -28,7 +28,6 @@ Kitura BluePic is a sample application for iOS that shows you how to connect you
 #### 2. Clone the Kitura-Bluepic Git repository
 
 ```bash
-cd <some directory>
 git clone https://github.com/IBM-Swift/Kitura-BluePic
 ```
 
