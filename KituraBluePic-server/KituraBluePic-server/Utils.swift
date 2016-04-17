@@ -70,15 +70,24 @@ func createPhotoDocument (request: RouterRequest) -> (JSONDictionary?, String?) 
     
     if let profile = request.userInfo["profile"] as? UserProfile where photoName != nil {
         let ownerId = profile.id
-        let ownerName = profile.name.stringByReplacingOccurrencesOfString("%20", withString: " ")
 
-        let ext = photoName!.componentsSeparatedByString(".")[1].lowercaseString
+        #if os(Linux)
+            let ownerName = profile.displayName.stringByReplacingOccurrencesOfString("%20", withString: " ")
+            let ext = photoName!.componentsSeparatedByString(".")[1].lowercased()
+        #else
+            let ownerName = profile.displayName.replacingOccurrences(of: "%20", with: " ")            
+            let ext = photoName!.componentsSeparated(by: ".")[1].lowercased()
+        #endif
         let contentType = ContentType.contentTypeForExtension(ext)
-        
-        let tempDateString = NSDate().descriptionWithLocale(nil).bridge()
-        let dateString = tempDateString.substringToIndex(10) + "T" + tempDateString.substringWithRange(NSMakeRange(11, 8))
-        
-        title = title?.stringByReplacingOccurrencesOfString("%20", withString: " ") ?? ""
+        #if os(Linux)
+            let tempDateString = NSDate().descriptionWithLocale(nil).bridge()
+            let dateString = tempDateString.substringToIndex(10) + "T" + tempDateString.substringWithRange(NSMakeRange(11, 8))
+            title = title?.stringByReplacingOccurrencesOfString("%20", withString: " ") ?? ""
+        #else
+            let tempDateString = NSDate().description(withLocale: nil).bridge()
+            let dateString = tempDateString.substring(to: 10) + "T" + tempDateString.substring(with:NSMakeRange(11, 8))
+            title = title?.replacingOccurrences(of: "%20", with: " ") ?? ""
+        #endif
         
         let doc : JSONDictionary = ["ownerId": ownerId, "ownerName": ownerName, "title": title!, "date": dateString, "inFeed": true, "type": "photo"]
         
