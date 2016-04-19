@@ -13,14 +13,19 @@ Kitura BluePic is a sample application for iOS that shows you how to connect you
 
 ## Requirements
 
-- XCode 7.3
-- [Kitura](https://github.com/IBM-Swift/Kitura-BluePic)
+- XCode 7.3 (using the default toolchain)
+- If running the server on Linux, the 03/24 DEVELOPMENT drop of Swift 3.0
+- [Kitura](https://github.com/IBM-Swift/Kitura)
 - [Kitura CouchDB](https://github.com/IBM-Swift/Kitura-CouchDB)
 - [Kitura Redis](https://github.com/IBM-Swift/Kitura-redis)
 
 ## Getting Started
 
-#### 1. Install CouchDB and Redis
+#### 1. Install Kitura, CouchDB, and Redis
+Kitura installation instructions:
+- [On OSX](https://github.com/IBM-Swift/Kitura#installation-os-x)
+- [On Linux](https://github.com/IBM-Swift/Kitura#installation-linux-apt-based)
+
 [CouchDB installation instructions](https://wiki.apache.org/couchdb/Installation).
 
 [Redis installation instructions](http://redis.io/download).
@@ -38,6 +43,7 @@ Update in the `KituraBluePic-server/config.json` file in your cloned repository:
 
 1. The CouchDB server's IP address and port
 2. The name of the CouchDB database you want to use
+3. The Redis server's IP address and port
 
 As in the following example:
 
@@ -111,7 +117,7 @@ In order to have the app authenticate with Facebook, you must create an applicat
 ##### Google
 
 1. Go to [Enable Google services for your app](https://developers.google.com/mobile/add?platform=ios) page, and create  a new project: type `KituraBluePic` as the name of your new app, and enter the app's bundle id. To find the bundle identifier in the Xcode project you can do the following:
-	* Make sure the project navigator folder icon is selected in the top left of Xcode. Select the KituraBluePic project at the top of the file structure and then select the KituraBluePic target. Under the identity section, you should see a text field for the bundle identifier that is empty. You can make the bundle identifier anything you want, `com.KituraBluePic` for example.) and click the `Create` button.
+    * Make sure the project navigator folder icon is selected in the top left of Xcode. Select the KituraBluePic project at the top of the file structure and then select the KituraBluePic target. Under the identity section, you should see a text field for the bundle identifier that is empty. You can make the bundle identifier anything you want, `com.KituraBluePic` for example.) and click the `Create` button.
 
 1. Now press the `Continue and configure services` button.
 
@@ -126,6 +132,10 @@ In order to have the app authenticate with Facebook, you must create an applicat
 
 
 ## Using Kitura BluePic
+
+### Setting the server url
+
+The first time you start the app you will be prompted for the server url. If you are running the app in the iOS simulator the url will be *localhost:8090*. If you are running the app on a real iPhone the url will be *hostname:8090*, where *hostname* is the hostname of the computer running the Kitura-bluepic server.
 
 ### Facebook and Google Login
 
