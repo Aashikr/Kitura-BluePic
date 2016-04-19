@@ -23,7 +23,6 @@
 		1BC7AF5C1C0E39F100DDFD02 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC7AF5B1C0E39F100DDFD02 /* FeedViewModel.swift */; };
 		1BC7AF5F1C0E480800DDFD02 /* ImageFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC7AF5D1C0E480800DDFD02 /* ImageFeedCollectionViewCell.swift */; };
 		1BC7AF601C0E480800DDFD02 /* ImageFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BC7AF5E1C0E480800DDFD02 /* ImageFeedCollectionViewCell.xib */; };
-		2E4D8AC02FB99D9182ACBA20 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A9C2B7DA4CAD59B72337D7 /* Pods.framework */; };
 		3435C7C91C0368B1004923BD /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3435C7C81C0368B1004923BD /* Feed.storyboard */; };
 		3435C7CB1C0368DA004923BD /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3435C7CA1C0368DA004923BD /* Camera.storyboard */; };
 		3435C7CD1C03690F004923BD /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3435C7CC1C03690F004923BD /* Profile.storyboard */; };
@@ -46,12 +45,6 @@
 		347472ED1BFA8DEF0018B7F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 347472D31BFA8DEF0018B7F6 /* Main.storyboard */; };
 		347472EF1BFA8DEF0018B7F6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347472D71BFA8DEF0018B7F6 /* Utils.swift */; };
 		347472F11BFA8E320018B7F6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347472F01BFA8E320018B7F6 /* LoginViewController.swift */; };
-		347AD21A1C18E2DC00C3B473 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AD2141C18E2D200C3B473 /* Alamofire.framework */; };
-		347AD21B1C18E2DC00C3B473 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 347AD2141C18E2D200C3B473 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		347AD21C1C18E2DC00C3B473 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AD2151C18E2D200C3B473 /* AlamofireObjectMapper.framework */; };
-		347AD21D1C18E2DC00C3B473 /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 347AD2151C18E2D200C3B473 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		347AD21E1C18E2DC00C3B473 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347AD2161C18E2D200C3B473 /* ObjectMapper.framework */; };
-		347AD21F1C18E2DC00C3B473 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 347AD2161C18E2D200C3B473 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A209B2BB1C9A94D500D01D85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A209B2BA1C9A94D500D01D85 /* GoogleService-Info.plist */; };
 		A20BB5B51C96E416008B49B9 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20BB5B41C96E416008B49B9 /* UserManager.swift */; };
 		A22599A61C42791F00A72115 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A22599A51C42791F00A72115 /* Settings.storyboard */; };
@@ -84,9 +77,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				347AD21F1C18E2DC00C3B473 /* ObjectMapper.framework in Embed Frameworks */,
-				347AD21B1C18E2DC00C3B473 /* Alamofire.framework in Embed Frameworks */,
-				347AD21D1C18E2DC00C3B473 /* AlamofireObjectMapper.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,20 +127,14 @@
 		347472D31BFA8DEF0018B7F6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		347472D71BFA8DEF0018B7F6 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		347472F01BFA8E320018B7F6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		347AD2141C18E2D200C3B473 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
-		347AD2151C18E2D200C3B473 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = "<group>"; };
-		347AD2161C18E2D200C3B473 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjectMapper.framework; sourceTree = "<group>"; };
 		347E276C1C1F9CD10089EC3D /* KituraBluePic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KituraBluePic.entitlements; sourceTree = "<group>"; };
 		34C8094A1BFCD9A300C48004 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4DF2008F9A93E25237957424 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		548428B896D4182B293AB59E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A209B2BA1C9A94D500D01D85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A20BB5B41C96E416008B49B9 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A22599A51C42791F00A72115 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		A22599A71C42793300A72115 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A22599A91C427CF000A72115 /* SettingsConnectivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsConnectivityCell.swift; sourceTree = "<group>"; };
 		A2A8F0F71C3277E900C73B61 /* PhotosDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosDataManager.swift; sourceTree = "<group>"; };
-		A4A9C2B7DA4CAD59B72337D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDC4B5F21BFBC77200CC1648 /* KituraBluePic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KituraBluePic-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,10 +144,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				346F94841C10AA32004999A8 /* ImageIO.framework in Frameworks */,
-				347AD21A1C18E2DC00C3B473 /* Alamofire.framework in Frameworks */,
-				347AD21E1C18E2DC00C3B473 /* ObjectMapper.framework in Frameworks */,
-				347AD21C1C18E2DC00C3B473 /* AlamofireObjectMapper.framework in Frameworks */,
-				2E4D8AC02FB99D9182ACBA20 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,9 +300,6 @@
 		347AD2131C18E2A700C3B473 /* ExternalLibraries */ = {
 			isa = PBXGroup;
 			children = (
-				347AD2141C18E2D200C3B473 /* Alamofire.framework */,
-				347AD2151C18E2D200C3B473 /* AlamofireObjectMapper.framework */,
-				347AD2161C18E2D200C3B473 /* ObjectMapper.framework */,
 			);
 			path = ExternalLibraries;
 			sourceTree = "<group>";
@@ -378,7 +355,6 @@
 			isa = PBXGroup;
 			children = (
 				346F94831C10AA32004999A8 /* ImageIO.framework */,
-				A4A9C2B7DA4CAD59B72337D7 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -386,8 +362,6 @@
 		DF6A97152FD63FCE242B5547 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				548428B896D4182B293AB59E /* Pods.debug.xcconfig */,
-				4DF2008F9A93E25237957424 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -753,7 +727,6 @@
 		};
 		347472B31BFA8C6A0018B7F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 548428B896D4182B293AB59E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -778,7 +751,6 @@
 		};
 		347472B41BFA8C6A0018B7F6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DF2008F9A93E25237957424 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
