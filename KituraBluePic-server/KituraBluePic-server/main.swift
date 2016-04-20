@@ -32,7 +32,7 @@ import Foundation
 
 Log.logger = HeliumLogger()
 
-let (connectionProperties, dbName, redisHost, redisPort) = getConfiguration()
+let (connectionProperties, dbName, redisHost, redisPort, redisPassword) = getConfiguration()
 
 let dbClient = CouchDBClient(connectionProperties: connectionProperties)
 let database = dbClient.database(dbName)
@@ -42,7 +42,14 @@ let router = Router()
 let redis = Redis()
 redis.connect(redisHost, port: redisPort) {error in
     if  let error = error {
-        Log.error("Failed to connect to Redis server at \(redisHost):\(redisPort). Error=\(error.localizedDescription)")
+        Log.error("Failed to connect to the Redis server at \(redisHost):\(redisPort). Error=\(error.localizedDescription)")
+    }
+    else if let redisPassword = redisPassword {
+        redis.auth(redisPassword) {error in
+            if  let error = error {
+                Log.error("Failed to authenticate to the Redis server at \(redisHost):\(redisPort). Error=\(error.localizedDescription)")
+            }
+        }
     }
 }
 
