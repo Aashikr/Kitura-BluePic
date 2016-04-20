@@ -106,7 +106,7 @@ func createUploadReply (fromDocument document: JSONDictionary, id: String, photo
     return JSON(result)
 }
 
-func getConfiguration () -> (ConnectionProperties, String, String, Int32) {
+func getConfiguration () -> (ConnectionProperties, String, String, Int32, String?) {
     
     // In order to be able to access CouchDB through external address, go to 127.0.0.1:5984/_utils/config.html, httpd section and change bind_address to 0.0.0.0, and restart couchdb.
     
@@ -117,13 +117,14 @@ func getConfiguration () -> (ConnectionProperties, String, String, Int32) {
     if let configData = NSData(contentsOfFile: "./config.json") {
         let configJson = JSON(data:configData)
         if let ipAddress = configJson["couchDbIpAddress"].string,
-            let port = configJson["couchDbPort"].number,
-            let dbName = configJson["couchDbDbName"].string,
-            let redisHost = configJson["redisIpAddress"].string,
-            let redisPort = configJson["redisPort"].number {
-            return (ConnectionProperties(hostName: ipAddress, port: Int16(port.integerValue), secured: false),
+                let port = configJson["couchDbPort"].number,
+                let dbName = configJson["couchDbDbName"].string,
+                let redisHost = configJson["redisIpAddress"].string,
+                let redisPort = configJson["redisPort"].number {
+	    let redisPassword = configJson["redisPassword"].string
+            return (ConnectionProperties(host: ipAddress, port: Int16(port.integerValue), secured: false),
                     dbName,
-                    redisHost, Int32(redisPort.integerValue))
+                    redisHost, Int32(redisPort.integerValue), redisPassword)
         }
     }
     print("Failed to read the configuration file!")
