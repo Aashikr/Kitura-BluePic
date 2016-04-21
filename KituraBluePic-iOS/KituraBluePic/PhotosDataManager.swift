@@ -52,7 +52,7 @@ class PhotosDataManager {
         }
     }
     
-    func getFeedData (ownerId: String = "", callback: ([Picture]?, String?) -> ()) {
+    func getFeedData (ownerId: String? = "", callback: ([Picture]?, String?) -> ()) {
         if let nsURL = NSURL(string: "http://\(serverUrl)/photos") {
             let mutableURLRequest = NSMutableURLRequest(URL: nsURL)
             mutableURLRequest.HTTPMethod = "GET"

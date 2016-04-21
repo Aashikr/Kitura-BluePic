@@ -104,7 +104,7 @@ class ProfileViewModel: NSObject {
      Method gets the picture objects from cloudant based on the facebook unique user id. When this completes it tells the profile view controller to refresh its collection view
      */
     func getPictureObjects(){
-        PhotosDataManager.SharedInstance.getFeedData(UserManager.SharedInstance.uniqueUserID!) {(pictures, error) in
+        PhotosDataManager.SharedInstance.getFeedData(UserManager.SharedInstance.uniqueUserID) {(pictures, error) in
             if let error = error {
                 DataManagerCalbackCoordinator.SharedInstance.sendNotification(.PhotosListFailure(error))
             }

@@ -20,6 +20,8 @@ class SettingsConnectivityCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var serverField: UITextField!
     
+    @IBOutlet weak var serverPort: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         updateUI()
@@ -34,31 +36,35 @@ class SettingsConnectivityCell: UITableViewCell, UITextFieldDelegate {
     
     
     func refreshUI() {
-        let server = NSUserDefaults.standardUserDefaults().stringForKey(Utils.PREFERENCE_SERVER)
-        serverField.text = server
+        serverField.text = NSUserDefaults.standardUserDefaults().stringForKey(Utils.PREFERENCE_SERVER_URL)
+        serverPort.text = NSUserDefaults.standardUserDefaults().stringForKey(Utils.PREFERENCE_SERVER_PORT)
     }
     
     
-    // MARK: UITextFieldDelegate
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        if serverField.text != NSUserDefaults.standardUserDefaults().stringForKey(Utils.PREFERENCE_SERVER)  {
-            NSUserDefaults.standardUserDefaults().setObject(serverField.text, forKey: Utils.PREFERENCE_SERVER)
-            
-            PhotosDataManager.SharedInstance.connect(serverField.text!) { error in
-                if let _ = error {
-                    DataManagerCalbackCoordinator.SharedInstance.sendNotification(.ServerConnectionFailure("Bad server URL: " + self.serverField.text!))
-                }
-                else {
-                    DataManagerCalbackCoordinator.SharedInstance.sendNotification(.ServerConnectionSuccess)
-                }
+    @IBAction func connectButtonPressed(sender: UIButton) {
+        NSUserDefaults.standardUserDefaults().setObject(serverField.text, forKey: Utils.PREFERENCE_SERVER_URL)
+        NSUserDefaults.standardUserDefaults().setObject(serverPort.text, forKey: Utils.PREFERENCE_SERVER_PORT)
+        
+        var serverUrl = serverField.text!
+        if serverPort.text != "" {
+            serverUrl += ":" + serverPort.text!
+        }
+        PhotosDataManager.SharedInstance.connect(serverUrl) { error in
+            if let _ = error {
+                DataManagerCalbackCoordinator.SharedInstance.sendNotification(.ServerConnectionFailure("Bad server URL: " + serverUrl))
+            }
+            else {
+                DataManagerCalbackCoordinator.SharedInstance.sendNotification(.ServerConnectionSuccess)
             }
         }
     }
     
     
+    // MARK: UITextFieldDelegate
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }
+    
 }

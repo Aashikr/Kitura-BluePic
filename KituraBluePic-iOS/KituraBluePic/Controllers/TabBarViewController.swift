@@ -126,10 +126,14 @@ class TabBarViewController: UITabBarController {
     }
     
     func checkServerConnection () {
-        if let serverUrl = NSUserDefaults.standardUserDefaults().stringForKey(Utils.PREFERENCE_SERVER) {
-            PhotosDataManager.SharedInstance.connect(serverUrl) { error in
+        if let serverUrl = NSUserDefaults.standardUserDefaults().stringForKey(Utils.PREFERENCE_SERVER_URL) {
+            var url = serverUrl
+            if let serverPort = NSUserDefaults.standardUserDefaults().stringForKey(Utils.PREFERENCE_SERVER_PORT) {
+                url += ":" + serverPort
+            }
+            PhotosDataManager.SharedInstance.connect(url) { error in
                 if let _ = error {
-                    self.presentServerAlert("Bad server URL: " + serverUrl)
+                    self.presentServerAlert("Bad server URL: " + url)
                 }
                 else {
                     DataManagerCalbackCoordinator.SharedInstance.sendNotification(.ServerConnectionChecked)

@@ -19,7 +19,8 @@ import UIKit
 
 class Utils: NSObject {
     
-    static let PREFERENCE_SERVER = "server"
+    static let PREFERENCE_SERVER_URL = "serverUrl"
+    static let PREFERENCE_SERVER_PORT = "serverPort"
   
     /**
      Method gets a key from a plist, both specified in parameters
