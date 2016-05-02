@@ -75,15 +75,15 @@ func createPhotoDocument (request: RouterRequest) -> (JSONDictionary?, String?) 
             let ext = photoName!.componentsSeparatedByString(".")[1].lowercased()
         #else
             let ownerName = profile.displayName.replacingOccurrences(of: "%20", with: " ")            
-            let ext = photoName!.componentsSeparated(by: ".")[1].lowercased()
+            let ext = photoName!.components(separatedBy: ".")[1].lowercased()
         #endif
-        if let contentType = ContentType.contentTypeForExtension(ext) {
+        if let contentType = ContentType.sharedInstance.contentTypeForExtension(ext) {
             #if os(Linux)
                 let tempDateString = NSDate().descriptionWithLocale(nil).bridge()
                 let dateString = tempDateString.substringToIndex(10) + "T" + tempDateString.substringWithRange(NSMakeRange(11, 8))
                 title = title?.stringByReplacingOccurrencesOfString("%20", withString: " ") ?? ""
             #else
-                let tempDateString = NSDate().description(withLocale: nil).bridge()
+                let tempDateString = NSDate().description.bridge()
                 let dateString = tempDateString.substring(to: 10) + "T" + tempDateString.substring(with:NSMakeRange(11, 8))
                 title = title?.replacingOccurrences(of: "%20", with: " ") ?? ""
             #endif
@@ -122,9 +122,9 @@ func getConfiguration () -> (ConnectionProperties, String, String, Int32, String
                 let redisHost = configJson["redisIpAddress"].string,
                 let redisPort = configJson["redisPort"].number {
 	    let redisPassword = configJson["redisPassword"].string
-            return (ConnectionProperties(host: ipAddress, port: Int16(port.integerValue), secured: false),
+            return (ConnectionProperties(host: ipAddress, port: Int16(port.intValue), secured: false),
                     dbName,
-                    redisHost, Int32(redisPort.integerValue), redisPassword)
+                    redisHost, Int32(redisPort.intValue), redisPassword)
         }
     }
     print("Failed to read the configuration file!")

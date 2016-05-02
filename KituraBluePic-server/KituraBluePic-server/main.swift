@@ -40,7 +40,7 @@ let database = dbClient.database(dbName)
 let router = Router()
 
 let redis = Redis()
-redis.connect(redisHost, port: redisPort) {error in
+redis.connect(host: redisHost, port: redisPort) {error in
     if  let error = error {
         Log.error("Failed to connect to the Redis server at \(redisHost):\(redisPort). Error=\(error.localizedDescription)")
     }
@@ -56,14 +56,14 @@ redis.connect(redisHost, port: redisPort) {error in
 let fbCredentials = CredentialsFacebookToken()
 let googleCredentials = CredentialsGoogleToken()
 let credentials = Credentials()
-credentials.register(fbCredentials)
-credentials.register(googleCredentials)
+credentials.register(plugin: fbCredentials)
+credentials.register(plugin: googleCredentials)
 
 setupAdmin()
 
 setupPhotos()
 
-let server = HttpServer.listen(8090, delegate: router)
+let server = HttpServer.listen(port: 8090, delegate: router)
 
 Server.run()
 

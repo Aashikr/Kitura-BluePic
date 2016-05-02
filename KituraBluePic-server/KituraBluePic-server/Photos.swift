@@ -38,7 +38,7 @@ func setupPhotos() {
             if  let document = document where error == nil  {
                 do {
                     updatePhotoListsFetchedCounter()
-                    try response.status(HttpStatusCode.OK).sendJson(parsePhotosList(document)).end()
+                    try response.status(HttpStatusCode.OK).send(json: parsePhotosList(list: document)).end()
                 }
                 catch {
                     Log.error("Failed to send response to client")
@@ -61,7 +61,7 @@ func setupPhotos() {
                     if let contentType = contentType {
                         response.setHeader("Content-Type", value: contentType)
                     }
-                    response.status(HttpStatusCode.OK).sendData(photo)
+                    response.status(HttpStatusCode.OK).send(data: photo)
                 }
                 else {
                     response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Photo not found"])
@@ -77,13 +77,13 @@ func setupPhotos() {
         
     
     router.post("/photos/:title/:photoname") { request, response, next in
-        let (document, contentType) = createPhotoDocument(request)
+        let (document, contentType) = createPhotoDocument(request: request)
         if let document = document, let contentType = contentType {
             var image: NSData?
             let photoName = request.params["photoname"]!
             
             do {
-                try image = BodyParser.readBodyData(request)
+                try image = BodyParser.readBodyData(with: request)
             }
             catch {
                 response.error = NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Invalid photo"])
@@ -96,7 +96,7 @@ func setupPhotos() {
                     database.createAttachment(id, docRevison: revision, attachmentName: photoName, attachmentData: image!, contentType: contentType) { (rev, photoDoc, error) in
                         if let _ = photoDoc where error == nil  {
                             let reply = createUploadReply(fromDocument: document, id: id, photoName: photoName)
-                            response.status(HttpStatusCode.OK).sendJson(reply)
+                            response.status(HttpStatusCode.OK).send(json: reply)
                         }
                         else {
                             response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internal error"])
