@@ -123,7 +123,7 @@ func getConfiguration () -> (ConnectionProperties, String, String, Int32) {
             let dbName = configJson["couchDbDbName"].string,
             let redisHost = configJson["redisIpAddress"].string,
             let redisPort = configJson["redisPort"].number {
-                return (ConnectionProperties(hostName: ipAddress, port: Int16(port.integerValue), secured: false),
+                return (ConnectionProperties(host: ipAddress, port: Int16(port.integerValue), secured: false),
                     dbName,
                     redisHost, Int32(redisPort.integerValue))
         }
@@ -134,13 +134,14 @@ func getConfiguration () -> (ConnectionProperties, String, String, Int32) {
 
 func getDesign () -> (String?, JSON?) {
 
-    let designDoc = JSON(["_id" : "_design/photos",
-        "views" : [
+    let designDoc : JSONDictionary =
+        ["_id" : "_design/photos",
+         "views" : [
             "sortedByDate" : [
                 "map" : "function(doc) {if (doc.type == 'photo' && doc.title && doc.date && doc.ownerId && doc.ownerName) { emit(doc.date, {title: doc.title, ownerId: doc.ownerId, ownerName: doc.ownerName, attachments: doc._attachments});}}"
+                ]
             ]
         ]
-        ])
-    return ("photos", designDoc)
+    return ("photos", JSON(designDoc))
 }
 
