@@ -63,7 +63,7 @@ setupAdmin()
 
 setupPhotos()
 
-let server = HttpServer.listen(port: 8090, delegate: router)
+let server = HTTPServer.listen(port: 8090, delegate: router)
 
 Server.run()
 

@@ -19,11 +19,11 @@ import PackageDescription
 let package = Package(
     name: "KituraBluePic-server",
     dependencies: [
-        .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 0, minor: 11),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CouchDB.git", majorVersion: 0, minor: 11),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-redis.git", majorVersion: 0, minor: 11),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebookToken.git", majorVersion: 0, minor: 11),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogleToken.git", majorVersion: 0, minor: 11)
+        .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 0, minor: 13),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CouchDB.git", majorVersion: 0, minor: 13),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-redis.git", majorVersion: 0, minor: 13),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsFacebookToken.git", majorVersion: 0, minor: 13),
+        .Package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGoogleToken.git", majorVersion: 0, minor: 13)
     ],
     exclude: ["Makefile", "Kitura-Build"]
 )

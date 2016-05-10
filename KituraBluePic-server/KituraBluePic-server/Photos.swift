@@ -34,11 +34,11 @@ func setupPhotos() {
     router.post("/photos/:title/:photoname", middleware: credentials)
     
     router.get("/photos") { _, response, next in
-        database.queryByView("sortedByDate", ofDesign: "photos", usingParameters: [.Descending(true)]) { (document, error) in
+        database.queryByView("sortedByDate", ofDesign: "photos", usingParameters: [.descending(true)]) { (document, error) in
             if  let document = document where error == nil  {
                 do {
                     updatePhotoListsFetchedCounter()
-                    try response.status(HttpStatusCode.OK).send(json: parsePhotosList(list: document)).end()
+                    try response.status(.OK).send(json: parsePhotosList(list: document)).end()
                 }
                 catch {
                     Log.error("Failed to send response to client")
@@ -61,7 +61,7 @@ func setupPhotos() {
                     if let contentType = contentType {
                         response.setHeader("Content-Type", value: contentType)
                     }
-                    response.status(HttpStatusCode.OK).send(data: photo)
+                    response.status(.OK).send(data: photo)
                 }
                 else {
                     response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Photo not found"])
@@ -96,7 +96,7 @@ func setupPhotos() {
                     database.createAttachment(id, docRevison: revision, attachmentName: photoName, attachmentData: image!, contentType: contentType) { (rev, photoDoc, error) in
                         if let _ = photoDoc where error == nil  {
                             let reply = createUploadReply(fromDocument: document, id: id, photoName: photoName)
-                            response.status(HttpStatusCode.OK).send(json: reply)
+                            response.status(.OK).send(json: reply)
                         }
                         else {
                             response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internal error"])

@@ -28,7 +28,7 @@ import Foundation
 
 func setupAdmin() {
     router.get("/connect") { _, response, next in
-        response.status(HttpStatusCode.OK)
+        response.status(.OK)
         
         next()
     }
@@ -40,7 +40,7 @@ func setupAdmin() {
                 next()
             }
             else if  exists  {
-                response.status(HttpStatusCode.OK)
+                response.status(.OK)
                 next()
             }
             else {
@@ -55,7 +55,7 @@ func setupAdmin() {
                     if let design = design, let designName = designName {
                         database.createDesign (designName, document: design) { (document, error) in
                             if  error == nil  &&  document != nil  {
-                                response.status(HttpStatusCode.OK)
+                                response.status(.OK)
                             }
                             else {
                                 response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internal error"])
