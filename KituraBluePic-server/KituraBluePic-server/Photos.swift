@@ -135,5 +135,5 @@ private func updatePhotoListsFetchedCounter() {
     }
 }
 
-let redisQueue = Queue(type: .SERIAL, label: "RedisQueue")
+let redisQueue = Queue(type: .serial, label: "RedisQueue")
 
