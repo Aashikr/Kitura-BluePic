@@ -59,7 +59,7 @@ func setupPhotos() {
             database.retrieveAttachment(docId!, attachmentName: attachmentName!) { (photo, error, contentType) in
                 if  let photo = photo where error == nil  {
                     if let contentType = contentType {
-                        response.setHeader("Content-Type", value: contentType)
+                        response.headers["Content-Type"] = contentType
                     }
                     response.status(.OK).send(data: photo)
                 }
