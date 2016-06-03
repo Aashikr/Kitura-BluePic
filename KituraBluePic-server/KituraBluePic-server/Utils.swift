@@ -35,8 +35,10 @@ import Foundation
 ///
 #if os(OSX)
     typealias JSONDictionary = [String: AnyObject]
+    typealias ParameterType = AnyObject
 #else
     typealias JSONDictionary = [String: Any]
+    typealias ParameterType = Any
 #endif
 
 
@@ -45,7 +47,7 @@ func parsePhotosList (list: JSON) -> JSON {
     let listLength = Int(list["total_rows"].number!)
     if listLength == 0 {
         let empty = [[String:String]]()
-        return JSON(empty)
+        return JSON(empty as ParameterType)
     }
     for index in 0...(listLength - 1) {
         let photoId = list["rows"][index]["id"].stringValue
@@ -57,7 +59,7 @@ func parsePhotosList (list: JSON) -> JSON {
         let attachments = data["attachments"]!.dictionaryValue
         let attachmentName = ([String](attachments.keys))[0]
         
-        let photo = JSON(["title": title,  "date": date, "ownerId": ownerId, "ownerName": ownerName, "picturePath": "\(photoId)/\(attachmentName)"])
+        let photo = JSON(["title": title,  "date": date, "ownerId": ownerId, "ownerName": ownerName, "picturePath": "\(photoId)/\(attachmentName)"] as ParameterType)
         photos.append(photo)
         
     }
@@ -76,7 +78,7 @@ func createPhotoDocument (request: RouterRequest) -> (JSONDictionary?, String?) 
             let tempDateString = NSDate().description.bridge()
             let dateString = tempDateString.substring(to: 10) + "T" + tempDateString.substring(with:NSMakeRange(11, 8))
             title = title?.replacingOccurrences(of: "%20", with: " ") ?? ""
-            let doc : JSONDictionary = ["ownerId": ownerId, "ownerName": ownerName, "title": title!, "date": dateString, "inFeed": true, "type": "photo"]
+            let doc : JSONDictionary = ["ownerId": ownerId as ParameterType, "ownerName": ownerName as ParameterType, "title": title! as ParameterType, "date": dateString as ParameterType, "inFeed": true, "type": "photo"]
             
             return (doc, contentType)
         }
@@ -92,7 +94,7 @@ func createUploadReply (fromDocument document: JSONDictionary, id: String, photo
     result["ownerName"] = document["ownerName"] as? String
     result["date"] = document["date"] as? String
     result["title"] = document["title"] as? String
-    return JSON(result)
+    return JSON(result as ParameterType)
 }
 
 func getConfiguration () -> (ConnectionProperties, String, String, Int32, String?) {
@@ -130,6 +132,6 @@ func getDesign () -> (String?, JSON?) {
             ]
         ]
     
-    return ("photos", JSON(designDoc))
+    return ("photos", JSON(designDoc as ParameterType))
 }
 

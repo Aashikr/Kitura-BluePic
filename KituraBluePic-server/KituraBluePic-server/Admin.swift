@@ -25,6 +25,12 @@ import SwiftyJSON
 
 import Foundation
 
+#if os(Linux)
+    public typealias ErrorKey = String
+#else
+    public typealias ErrorKey = NSString
+#endif
+
 
 func setupAdmin() {
     router.get("/connect") { _, response, next in
@@ -46,7 +52,7 @@ func setupAdmin() {
             else {
                 dbClient.createDB(dbName) { (db, error) in
                     guard  error == nil  &&  db != nil  else {
-                        response.error = error ?? NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internal error"])
+                        response.error = error ?? NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey as ErrorKey:"Internal error"])
                         next()
                         return
                     }
@@ -58,7 +64,7 @@ func setupAdmin() {
                                 response.status(.OK)
                             }
                             else {
-                                response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internal error"])
+                                response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey as ErrorKey:"Internal error"])
                             }
                             next()
                         }

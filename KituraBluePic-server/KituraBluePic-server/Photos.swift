@@ -26,7 +26,6 @@ import SwiftyJSON
 
 import Foundation
 
-
 /// Setup the handlers for the Photo APIs
 func setupPhotos() {
     router.all("/photos/*", middleware: BodyParser())
@@ -45,7 +44,7 @@ func setupPhotos() {
                 }
             }
             else {
-                response.error = error ?? NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"View not found"])
+                response.error = error ?? NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"View not found"] as AnyObject as? [NSObject : AnyObject])
             }
             next()
         }
@@ -64,13 +63,13 @@ func setupPhotos() {
                     response.status(.OK).send(data: photo)
                 }
                 else {
-                    response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Photo not found"])
+                    response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey as ErrorKey:"Photo not found"])
                 }
                 next()
             }
         }
         else {
-            response.error = NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Photo not found"])
+            response.error = NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Photo not found"] as AnyObject as? [NSObject : AnyObject])
             next()
         }
     }
@@ -86,12 +85,16 @@ func setupPhotos() {
                 try image = BodyParser.readBodyData(with: request)
             }
             catch {
-                response.error = NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Invalid photo"])
+                response.error = NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey as ErrorKey:"Invalid photo"])
                 next()
                 return
             }
-            
-            database.create(JSON(document)) { (id, revision, doc, error) in
+#if os(Linux)
+            let jsonDocument = JSON(document)
+#else
+            let jsonDocument = JSON(document as AnyObject)
+#endif
+            database.create(jsonDocument) { (id, revision, doc, error) in
                 if let _ = doc, let id = id, let revision = revision where error == nil {
                     database.createAttachment(id, docRevison: revision, attachmentName: photoName, attachmentData: image!, contentType: contentType) { (rev, photoDoc, error) in
                         if let _ = photoDoc where error == nil  {
@@ -99,19 +102,19 @@ func setupPhotos() {
                             response.status(.OK).send(json: reply)
                         }
                         else {
-                            response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internal error"])
+                            response.error = error  ??  NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey as ErrorKey:"Internal error"])
                         }
                         next()
                     }
                 }
                 else {
-                    response.error = error ?? NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internal error"])
+                    response.error = error ?? NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey as ErrorKey:"Internal error"])
                     next()
                 }
             }
         }
         else {
-            response.error = NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey:"Invalid photo"])
+            response.error = NSError(domain: "SwiftBluePic", code: 1, userInfo: [NSLocalizedDescriptionKey as ErrorKey:"Invalid photo"])
             next()
         }
     }
