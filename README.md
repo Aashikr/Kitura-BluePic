@@ -1,3 +1,6 @@
+# **Deprecated**
+Please refer to the updated BluePic repo here: https://github.com/IBM-Swift/BluePic
+
 #Kitura BluePic
 
 Kitura BluePic is a sample application for iOS that shows you how to connect your mobile application with Kitura server written in Swift. It is a photo sharing app that allows you to take photos, upload them and share them with the Kitura BluePic community.
